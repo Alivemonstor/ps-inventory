@@ -1,4 +1,4 @@
-# PS-Inventory
+# PS-Inventory Alivemonstor's Edit
 
 lj-Inventory has been fully redesigned by [OK1ez](https://github.com/OK1ez), under the name ps-inventory.
 
@@ -12,11 +12,8 @@ Future updates will be coming and we will of course support all normal monitor s
 
 ### Full Inventory
 
-![image](https://github.com/Project-Sloth/ps-inventory/assets/82112471/fda2588d-e468-4fd5-8bf5-2f584f059609)
+![image](https://cdn.discordapp.com/attachments/1165582988168409169/1165582988675907686/image.png?ex=65a3a9bf&is=659134bf&hm=56a34041d35f0d49fa04b160220b550e1c28d0ecedfbdbca382bd79fbf40e62e&)
 
-### Options Menu
-
-![image](https://github.com/Project-Sloth/ps-inventory/assets/82112471/1782f97a-27e6-441b-90a1-ff150cd846e2)
 
 ### Hotbar Slots
 
