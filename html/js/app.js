@@ -479,6 +479,13 @@ function FormatItemInfo(itemData, dom) {
                 "</span></p><p style=\"font-size:11px\"><b>Weight: </b>" + itemData.weight + " | <b>Amount: </b> " + itemData.amount + " | <b>Quality: </b> " + "<a style=\"font-size:11px;color:green\">" + Math.floor(itemData.info.quality) + "</a>"
 
             );
+            if (itemData.name == "blueprint_document") { // Blueprint for crafting
+                $(".item-info-title").html("<p>" + itemData.label + "</p>");
+                $(".item-info-description").html(
+                    "<p><span>" + itemData.description + "</span></p>" +
+                    "<p><strong>Blueprint :</strong> " + itemData.info.blueprint_label + "</p>"
+                );
+            }
         } else if (itemData.name == "driver_license") {
             $(".item-info-title").html("<p>" + itemData.label + "</p>");
             $(".item-info-description").html(
@@ -503,6 +510,58 @@ function FormatItemInfo(itemData, dom) {
                 itemData.info.birthdate +
                 "</span></p>"
             );
+        } else if (itemData.name == "hunterlicense") {
+            $(".item-info-title").html("<p>" + itemData.label + "</p>");
+            $(".item-info-description").html(
+                "<p><strong>First Name: </strong><span>" +
+                itemData.info.firstname +
+                "</span></p><p><strong>Last Name: </strong><span>" +
+                itemData.info.lastname + 
+                "</span></p><p><strong>Date Issued: </strong><span>" +
+                itemData.info.created +
+                "</span></p><p><strong>Expiration Date: </strong><span>" +
+                itemData.info.expire + "</a>"
+            );
+            } else if (itemData.name == "heart") {
+            $(".item-info-title").html("<p>" + itemData.label + "</p>");
+            $(".item-info-description").html(
+                "<b>Quality: </b> " + "<a style=\"font-size:11px;color:green\">" + Math.floor(itemData.info.quality) + "</a>"
+            );
+        } else if (itemData.name == "lungs") {
+            $(".item-info-title").html("<p>" + itemData.label + "</p>");
+            $(".item-info-description").html(
+                "<b>Quality: </b> " + "<a style=\"font-size:11px;color:green\">" + Math.floor(itemData.info.quality) + "</a>"
+            );
+        } else if (itemData.name == "brain") {
+            $(".item-info-title").html("<p>" + itemData.label + "</p>");
+            $(".item-info-description").html(
+                "<b>Quality: </b> " + "<a style=\"font-size:11px;color:green\">" + Math.floor(itemData.info.quality) + "</a>"
+            );
+        } else if (itemData.name == "intestines") {
+            $(".item-info-title").html("<p>" + itemData.label + "</p>");
+            $(".item-info-description").html(
+                "<b>Quality: </b> " + "<a style=\"font-size:11px;color:green\">" + Math.floor(itemData.info.quality) + "</a>"
+            );
+        } else if (itemData.name == "kidneys") {
+            $(".item-info-title").html("<p>" + itemData.label + "</p>");
+            $(".item-info-description").html(
+                "<b>Quality: </b> " + "<a style=\"font-size:11px;color:green\">" + Math.floor(itemData.info.quality) + "</a>"
+            );
+        } else if (itemData.name == "stomach") {
+            $(".item-info-title").html("<p>" + itemData.label + "</p>");
+            $(".item-info-description").html(
+                "<b>Quality: </b> " + "<a style=\"font-size:11px;color:green\">" + Math.floor(itemData.info.quality) + "</a>"
+            );
+        } else if (itemData.name == "liver") {
+            $(".item-info-title").html("<p>" + itemData.label + "</p>");
+            $(".item-info-description").html(
+                "<b>Quality: </b> " + "<a style=\"font-size:11px;color:green\">" + Math.floor(itemData.info.quality) + "</a>"
+            );
+        } else if (itemData.name == "humanmeat") {
+            $(".item-info-title").html("<p>" + itemData.label + "</p>");
+            $(".item-info-description").html(
+                "<b>Quality: </b> " + "<a style=\"font-size:11px;color:green\">" + Math.floor(itemData.info.quality) + "</a>"
+            );
         } else if (itemData.name == "lawyerpass") {
             $(".item-info-title").html("<p>" + itemData.label + "</p>");
             $(".item-info-description").html(
@@ -520,6 +579,12 @@ function FormatItemInfo(itemData, dom) {
             $(".item-info-title").html("<p>" + itemData.label + "</p>");
             $(".item-info-description").html(
                 "<p>" + itemData.info.uses + " uses left.</p>"
+            );
+        } else if (itemData.name == "mechboard") {
+            $(".item-info-title").html("<p>" + itemData.label + "</p>");
+            $(".item-info-description").html(
+                "<p>" + itemData.info.vehplate + "</p>" +
+                "<p>" + itemData.info.veh + "</p>"
             );
         } else if (itemData.type == "weapon") {
             $(".item-info-title").html("<p>" + itemData.label + "</p>");
@@ -628,6 +693,9 @@ function FormatItemInfo(itemData, dom) {
                 itemData.info.cash +
                 "</span></p><p style=\"font-size:11px\"><b>Weight: </b>" + itemData.weight + " | <b>Amount: </b> " + itemData.amount + " | <b>Quality: </b> " + "<a style=\"font-size:11px;color:green\">" + Math.floor(itemData.info.quality) + "</a>"
             );
+        } else if (itemData.name == "bounty-contract") {
+            $(".item-info-title").html('<p>' + itemData.label + '</p>')
+            $(".item-info-description").html('<p><strong>First Name: </strong><span>'+ itemData.info.targetname + '</span></p><p><strong>Last Name: </strong><span>'+ itemData.info.targetlastname+ '</span></p><p><strong>Last Seen: </strong><span>'+ itemData.info.lastseen+ '</span></p><p><strong>Bounty: $</strong><span>'+ itemData.info.bountyprice+ '</span></p><p><strong>Wanted For: </strong><span>'+ itemData.info.wantedfor);
         } else if (itemData.name == "markedbills") {
             $(".item-info-title").html("<p>" + itemData.label + "</p>");
             $(".item-info-description").html(
@@ -1331,7 +1399,7 @@ function swap($fromSlot, $toSlot, $fromInv, $toInv, $toAmount) {
                 if (newData.info.quality !== fromData.info.quality  ) {
                     InventoryError($fromInv, $fromSlot);
                     $.post(
-                        "https://qb-inventory/Notify",
+                        "https://ps-inventory/Notify",
                         JSON.stringify({
                             message: "You can not stack items which are not the same quality.",
                             type: "error",
@@ -2349,7 +2417,7 @@ var requiredItemOpen = false;
 
     Inventory.slots = 40;
 
-    Inventory.dropslots = 32;
+    Inventory.dropslots = 16;
     Inventory.droplabel = "Drop";
     Inventory.dropmaxweight = 100000;
 

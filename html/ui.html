@@ -48,10 +48,10 @@
                     <div class="player-inventory-bg">
                     <div class="player-inventory" data-inventory="player"></div>
                     <div class="player-inventory-first" data-inventory="player"></div>
+                    <!-- <div class="player-inventory-clothes" data-inventory="player"></div> -->
                 </div>
                 <div class="inv-options">
                   <div class="inv-options-list">
-                      <img class="brand-logo" src="./images/ps-symbol.svg"></img>
                       <!-- <div class="inv-option-item color-picker-container">
                         <label for="favcolor">Color:</label>
                         <input type="color" id="favcolor" name="favcolor" value="#ff0000">
@@ -91,35 +91,6 @@
             <div id="inventory-menus" style="min-height: 100vh;">
                 <div class="row">
                   <!-- Anyone really use this? -Ok1ez -->
-                  <div class="inv-help-options">
-                    <q-btn class="" color="button" @click="options = true"><i class="fas fa-gear"></i></q-btn>
-                    <!-- <q-btn class="" color="button" @click="help = true"><i class="fas fa-question"></i></q-btn> -->
-                  </div>
-                  <q-dialog v-model="options">
-                    <q-card>
-                      <q-card-section>
-                        <div class="text-h6">Options</div>
-                      </q-card-section>
-              
-                      <q-card-section class="q-pt-none">
-                        <div class="text-check">
-                            <q-item borderless dark tag="label" v-ripple>
-                                <q-item-section avatar>
-                                <q-checkbox dark v-on:click="select($event)" v-model="showblur" color="checkbox"></q-checkbox>
-                            </q-item-section>
-                            <q-item-section>
-                                <q-item-label class="text-check">Show Background Blur</q-item-label>
-                                <q-item-label caption>Disabling this will remove the background blur effect while inside your inventory.</q-item-label>
-                            </q-item-section>
-                            </q-item>
-                        </div>
-                      </q-card-section>
-              
-                      <q-card-actions style="margin-bottom: 2vh; margin-right: 2vh!important;"align="right">
-                        <q-btn color="button" text-color="white" label="CLOSE" v-close-popup></q-btn>
-                      </q-card-actions>
-                    </q-card>
-                  </q-dialog>
 
                   <q-dialog position="right" v-model="help">
                     <q-card style="max-width: 786px; padding: 40px 20px 40px 30px; bottom: 2.5vh; right: 2.25vw;">

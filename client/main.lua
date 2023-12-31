@@ -687,7 +687,7 @@ RegisterCommand('closeinv', function()
     closeInventory()
 end, false)
 
-RegisterNetEvent("qb-inventory:client:closeinv", function()
+RegisterNetEvent("ps-inventory:client:closeinv", function()
     closeInventory()
 end)
 
@@ -735,49 +735,49 @@ RegisterCommand('inventory', function()
                 local vehicleClass = GetVehicleClass(curVeh)
                 local maxweight
                 local slots
-                if vehicleClass == 0 then
-                    maxweight = 38000
+                if vehicleClass == 0 then -- Compacts
+                    maxweight = 120000
                     slots = 30
-                elseif vehicleClass == 1 then
-                    maxweight = 50000
+                elseif vehicleClass == 1 then  -- Sedans
+                    maxweight = 100000
                     slots = 40
-                elseif vehicleClass == 2 then
-                    maxweight = 75000
+                elseif vehicleClass == 2 then -- SUVs
+                    maxweight = 125000
                     slots = 50
-                elseif vehicleClass == 3 then
-                    maxweight = 42000
+                elseif vehicleClass == 3 then -- Coupes
+                    maxweight = 150000
                     slots = 35
-                elseif vehicleClass == 4 then
-                    maxweight = 38000
+                elseif vehicleClass == 4 then -- Muscle
+                    maxweight = 140000
                     slots = 30
-                elseif vehicleClass == 5 then
+                elseif vehicleClass == 5 then -- Sports Classics
                     maxweight = 30000
                     slots = 25
-                elseif vehicleClass == 6 then
+                elseif vehicleClass == 6 then -- Sports
                     maxweight = 30000
                     slots = 25
-                elseif vehicleClass == 7 then
+                elseif vehicleClass == 7 then -- Super
                     maxweight = 30000
                     slots = 25
-                elseif vehicleClass == 8 then
+                elseif vehicleClass == 8 then  -- Motorcycles
                     maxweight = 15000
                     slots = 15
-                elseif vehicleClass == 9 then
-                    maxweight = 60000
+                elseif vehicleClass == 9 then -- Off-road
+                    maxweight = 140000
                     slots = 35
-                elseif vehicleClass == 12 then
-                    maxweight = 120000
+                elseif vehicleClass == 12 then -- Vans
+                    maxweight = 180000
                     slots = 35
-                elseif vehicleClass == 13 then
+                elseif vehicleClass == 13 then -- Cycles
                     maxweight = 0
                     slots = 0
-                elseif vehicleClass == 14 then
+                elseif vehicleClass == 14 then -- Boats
+                    maxweight = 100000
+                    slots = 50
+                elseif vehicleClass == 15 then -- Helicopters
                     maxweight = 120000
                     slots = 50
-                elseif vehicleClass == 15 then
-                    maxweight = 120000
-                    slots = 50
-                elseif vehicleClass == 16 then
+                elseif vehicleClass == 16 then -- Planes
                     maxweight = 120000
                     slots = 50
                 else
@@ -831,7 +831,7 @@ for i = 1, 6 do
     RegisterKeyMapping('slot' .. i, 'Uses the item in slot ' .. i, 'keyboard', i)
 end
 
-RegisterNetEvent('qb-inventory:client:giveAnim', function()
+RegisterNetEvent('ps-inventory:client:giveAnim', function()
     LoadAnimDict('mp_common')
 	TaskPlayAnim(PlayerPedId(), 'mp_common', 'givetake1_b', 8.0, 1.0, -1, 16, 0, 0, 0, 0)
 end)
