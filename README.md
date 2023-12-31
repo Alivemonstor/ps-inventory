@@ -1,6 +1,6 @@
 # PS-Inventory Alivemonstor's Edit
 
-lj-Inventory has been fully redesigned by [OK1ez](https://github.com/OK1ez), under the name ps-inventory.
+lj-Inventory has been fully redesigned by [OK1ez](https://github.com/OK1ez), under the name ps-inventory. This has now been updated by me to support a different look and added support for as many monitor sizes as i could find.
 
 Future updates will be coming and we will of course support all normal monitor sizes.
 
@@ -12,20 +12,20 @@ Future updates will be coming and we will of course support all normal monitor s
 
 ### Full Inventory
 
-![image](https://cdn.discordapp.com/attachments/1165582988168409169/1165582988675907686/image.png?ex=65a3a9bf&is=659134bf&hm=56a34041d35f0d49fa04b160220b550e1c28d0ecedfbdbca382bd79fbf40e62e&)
+![image](https://cdn.discordapp.com/attachments/845269951312166942/1190985802189115455/image.png?ex=65a3caf6&is=659155f6&hm=be89825469500cf2b6270da4926fa90333a57ce18b12c70bad7c2bd62cd4a8fc&)
 
 
 ### Hotbar Slots
 
-![image](https://github.com/Project-Sloth/ps-inventory/assets/82112471/c0a77f4a-f482-42f5-a5da-1f3571d14130)
+![image](https://cdn.discordapp.com/attachments/845269951312166942/1190986030866780240/image.png?ex=65a3cb2d&is=6591562d&hm=92ea1f6a054cb1df000d7f42c54e075479dc45a5c57fe4708cc89943d66c9119&)
 
 ### Inventory Glovebox
 
-![image](https://github.com/Project-Sloth/ps-inventory/assets/82112471/432f8c79-1a9f-44d1-8062-50b596194752)
+![image](https://cdn.discordapp.com/attachments/845269951312166942/1190986122583613520/image.png?ex=65a3cb43&is=65915643&hm=4b172aa4e5eed64ad897c49b758a7b644f32c419d75890bffff70a9ddc8bc2e1&)
 
 ### Inventory Trunk
 
-![image](https://github.com/Project-Sloth/ps-inventory/assets/82112471/f9c78e49-ec51-4d55-9ac0-b7058951d31a)
+![image](https://cdn.discordapp.com/attachments/845269951312166942/1190986298643709972/image.png?ex=65a3cb6d&is=6591566d&hm=1a150f5953c59afc53549e1f310b1b1d821e77a4bec7db24149f95513d27e1d7&)
 
 # Key Features
 
@@ -95,8 +95,8 @@ In this example, the sandwich item would take 3 days to decay and once it does, 
 Runs at ~ 0.00 to 0.01 ms if you have more optimization suggestions feel free to reach out
 
 # Credits
-
-* [OK1ez](https://github.com/OK1ez) for full redesign. 
+* Alivemonstor for Updated [Redesign](https://github.com/Alivemonstor)
+* [OK1ez](https://github.com/OK1ez) for full Initial redesign. 
 * ihyajb (Aj) for [original version](https://github.com/ihyajb/aj-inventory)
 * Jay for [decay](https://github.com/tnj-development/inventory)
 * i-kulgu for [updated decay](https://github.com/i-kulgu/qb-inventory-decay)
@@ -108,4 +108,4 @@ Please use the GitHub issues system to report issues or make suggestions, when m
 
 ## Connect with us
 
-Join our [**Discord**](https://discord.gg/projectsloth) for updates, support, and special early testing!
+Join our [**Discord**](https://discord.gg/vH4eFZkkp) for updates, support, and other scripts
