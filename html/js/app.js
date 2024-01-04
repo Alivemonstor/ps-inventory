@@ -2459,6 +2459,7 @@ var requiredItemOpen = false;
                 } else {
                     qualityLabel = item.info.quality;
                 }
+                console.log(qualityLabel)
                 if (item.info.quality == 0) {
                     qualityLabel = "BROKEN";
                     if (!IsOtherInventory) {
@@ -2565,9 +2566,26 @@ var requiredItemOpen = false;
             );
         }
         $(".player-inventory").append(firstSlots);
+
+        let icons = {
+            6: {fa: true, src: 'fa-solid fa-hat-cowboy-side'},
+            7: {fa: true, src: 'fa-solid fa-mask'},
+            8: {fa: true, src: 'fa-solid fa-vest'},
+            9: {fa: true, src: 'fa-solid fa-shirt'},
+            10: {fa: false, src: 'https://www.svgrepo.com/show/482545/pants-1.svg'},
+            11: {fa: true, src: 'fa-solid fa-shoe-prints'},
+        };
+
+        var clothes = $(".player-inventory-clothes");
+        for (i = 6; i < 12; i++) {
+            clothes.append(
+                `<div class="item-slot" data-slot="${i}"><div class="item-slot-key">${icons[i].fa == true ? `<i class='${icons[i].src}'></i>` : `<div style="display: flex; justify-content: center; width: 100%; height: 100%;"class="item-slot-svg"> <img style ='width: 50%;' src='${icons[i].src}'/></div>`}</div><div class="item-slot-img"></div></div>`
+            );
+        }
+        $(".player-inventory").append(clothes);
     
         var remainingSlots = $(".player-inventory");
-        for (i = 6; i < data.slots + 1; i++) {
+        for (i = 12; i < data.slots + 1; i++) {
             if (i == 43) {
                 remainingSlots.append(
                     '<div class="item-slot" data-slot="' +
@@ -2858,6 +2876,8 @@ var requiredItemOpen = false;
         $(".player-inventory").find(".item-slot").remove();
         $(".player-inventory-first").find(".item-slot").remove();
         $(".ply-hotbar-inventory").find(".item-slot").remove();
+        $(".player-inventory-clothes").find(".item-slot").remove();
+        
         if (data.error) {
             Inventory.Error();
         }
@@ -2872,9 +2892,26 @@ var requiredItemOpen = false;
             );
         }
         $(".player-inventory").append(firstSlots);
+
+        let icons = {
+            6: {fa: true, src: 'fa-solid fa-hat-cowboy-side'},
+            7: {fa: true, src: 'fa-solid fa-mask'},
+            8: {fa: true, src: 'fa-solid fa-vest'},
+            9: {fa: true, src: 'fa-solid fa-shirt'},
+            10: {fa: false, src: 'https://www.svgrepo.com/show/482545/pants-1.svg'},
+            11: {fa: true, src: 'fa-solid fa-shoe-prints'},
+        };
+
+        var clothes = $(".player-inventory-clothes");
+        for (i = 6; i < 12; i++) {
+            clothes.append(
+                `<div class="item-slot" data-slot="${i}"><div class="item-slot-key">${icons[i].fa == true ? `<i class='${icons[i].src}'></i>` : `<div style="display: flex; justify-content: center; width: 100%; height: 100%;"class="item-slot-svg"> <img style ='width: 50%;' src='${icons[i].src}'/></div>`}</div><div class="item-slot-img"></div></div>`
+            );
+        }
+        $(".player-inventory").append(clothes);
     
         var remainingSlots = $(".player-inventory");
-        for (i = 6; i < data.slots + 1; i++) {
+        for (i = 12; i < data.slots + 1; i++) {
             if (i == 43) {
                 remainingSlots.append(
                     '<div class="item-slot" data-slot="' +
@@ -2894,6 +2931,16 @@ var requiredItemOpen = false;
         $.each(data.inventory, function(i, item) {
             if (item != null) {
                 totalWeight += item.weight * item.amount;
+                                    var ItemLabel =
+                        '<div class="item-slot-label"><p>' + item.label + "</p></div>";
+                    // if (item.name.split("_")[0] == "weapon") {
+                        // if (!Inventory.IsWeaponBlocked(item.name)) {
+                            ItemLabel =
+                                '<div class="item-slot-quality"><div class="item-slot-quality-bar"><p>100</p></div></div><div class="item-slot-label"><p>' +
+                                item.label +
+                                "</p></div>";
+                        // }
+                    // }
                 if (item.slot < 6) {
                     $(".player-inventory")
                         .find("[data-slot=" + item.slot + "]")
@@ -2912,9 +2959,8 @@ var requiredItemOpen = false;
                             '</div><div class="item-slot-name"><p>' +
                             " " +
                             ((item.weight * item.amount) / 1000).toFixed(1) +
-                            '</p></div><div class="item-slot-label"><p>' +
-                            item.label +
-                            "</p></div>"
+                            "</p></div>" +
+                            ItemLabel 
                         );
                     $(".player-inventory")
                         .find("[data-slot=" + item.slot + "]")
@@ -2935,9 +2981,8 @@ var requiredItemOpen = false;
                             '</div><div class="item-slot-name"><p>' +
                             " " +
                             ((item.weight * item.amount) / 1000).toFixed(1) +
-                            '</p></div><div class="item-slot-label"><p>' +
-                            item.label +
-                            "</p></div>"
+                            "</p></div>" +
+                            ItemLabel 
                         );
                     $(".player-inventory")
                         .find("[data-slot=" + item.slot + "]")
@@ -2958,14 +3003,15 @@ var requiredItemOpen = false;
                             '</div><div class="item-slot-name"><p>' +
                             " " +
                             ((item.weight * item.amount) / 1000).toFixed(1) +
-                            '</p></div><div class="item-slot-label"><p>' +
-                            item.label +
-                            "</p></div>"
+                            "</p></div>" +
+                            ItemLabel 
                         );
                     $(".player-inventory")
                         .find("[data-slot=" + item.slot + "]")
                         .data("item", item);
                 }
+
+                Inventory.QualityCheck(item, false, false);
             }
         });
 

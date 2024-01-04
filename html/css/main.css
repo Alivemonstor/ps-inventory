@@ -188,8 +188,9 @@ body {
 }
 
 .player-inventory-clothes {
+
     position: absolute;
-    margin-top: -4.0rem;
+    margin-top: -7.0rem;
     margin-left: -21.3%;
     width: 19%; 
     height: 78.2%;
@@ -260,18 +261,15 @@ body {
     font-family: 'Roboto', sans-serif !important;
 }
 
-.player-inventory-clothes > .item-slot > .item-slot-key > p {
-    position: absolute; 
-    font-weight: 400; 
-    color: hwb(0 13% 87% / 0.129); 
-    padding-top: 4vh; 
-    padding-bottom: 0px; 
-    padding-left: 2.35vh; 
-    text-align: center; 
-    font-size: 7vh; 
-    line-height: 1.8vh; 
-    font-family: 'Roboto', sans-serif !important;
+.player-inventory-clothes > .item-slot > .item-slot-key > i, .player-inventory-clothes > .item-slot > .item-slot-key > img{
+    color: hwb(0 0% 100%);
+    font-size: 32px;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    align-items: center;
 }
+
 
 .inv-options {
     position: absolute;

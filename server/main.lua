@@ -1456,6 +1456,11 @@ RegisterNetEvent('inventory:server:SetInventoryData', function(fromInventory, to
 		return
 	end
 
+	if (toSlot >= 6 and toSlot < 12) and (toInventory == "player") then
+		return TriggerClientEvent("inventory:client:UpdatePlayerInventory", src, true)
+	end
+
+
 	if fromInventory == "player" or fromInventory == "hotbar" then
 		local fromItemData = GetItemBySlot(src, fromSlot)
 		fromAmount = tonumber(fromAmount) or fromItemData.amount
