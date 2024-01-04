@@ -188,7 +188,6 @@ body {
 }
 
 .player-inventory-clothes {
-
     position: absolute;
     margin-top: -7.0rem;
     margin-left: -21.3%;
@@ -757,7 +756,8 @@ body {
     width: 10vh;
     height: 11vh;
     border: 2px solid #41414b;
-    background-color: #33343d !important;
+    background-color: rgba(51, 52, 61, 0.500) !important;
+    opacity: 90%;
     border-radius: 9px;
 }
 
@@ -903,11 +903,11 @@ body {
     height: 8.30rem;
     float: left;
     border: 2px solid #41414b;
-    background-color: #33343d !important;
+    background-color: rgba(51, 52, 61, 0.500) !important;
+    opacity: 90%;
     margin: 3px;
     transition: opacity 0.2s ease 0s;
     border-radius: 9px;
-    opacity: 90%;
     z-index: 9999;
 }
 
