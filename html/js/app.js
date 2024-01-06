@@ -2584,7 +2584,7 @@ var requiredItemOpen = false;
         }
         $(".player-inventory").append(clothes);
     
-        var remainingSlots = $(".player-inventory");
+        var remainingSlots = $(".player-inventory-slots");
         for (i = 12; i < data.slots + 1; i++) {
             if (i == 43) {
                 remainingSlots.append(
@@ -2604,7 +2604,7 @@ var requiredItemOpen = false;
         
         if (data.other != null && data.other != "") {
             for (i = 1; i < data.other.slots + 1; i++) {
-                $(".other-inventory").append(
+                $(".other-inventory-slots").append(
                     '<div class="item-slot" data-slot="' +
                     i +
                     '"><div class="item-slot-img"></div><div class="item-slot-label"><p>&nbsp;</p></div></div>'
@@ -2612,13 +2612,13 @@ var requiredItemOpen = false;
             }
         } else {
             for (i = 1; i < Inventory.dropslots + 1; i++) {
-                $(".other-inventory").append(
+                $(".other-inventory-slots").append(
                     '<div class="item-slot" data-slot="' +
                     i +
                     '"><div class="item-slot-img"></div><div class="item-slot-label"><p>&nbsp;</p></div></div>'
                 );
             }
-            $(".other-inventory .item-slot").css({
+            $(".other-inventory-slots .item-slot").css({
                 "background-color": "rgba(0, 0, 0, 0.3)",
             });
         }
@@ -2910,7 +2910,7 @@ var requiredItemOpen = false;
         }
         $(".player-inventory").append(clothes);
     
-        var remainingSlots = $(".player-inventory");
+        var remainingSlots = $(".player-inventory-slots");
         for (i = 12; i < data.slots + 1; i++) {
             if (i == 43) {
                 remainingSlots.append(

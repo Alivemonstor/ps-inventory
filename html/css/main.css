@@ -167,12 +167,22 @@ body {
     top: 25%;
     left: 2.3%;
     width: 100.22%;
-    max-width: 102.22%;
+    max-width: 100.22%;
     height: 100%;
-    max-height: 132%;
+    max-height: 100%;
     float: right;
     z-index: 100;
+    padding-right: 11%;
+
 }
+
+
+.player-inventory-slots {
+    height: 47%;
+    overflow-y: auto;
+    max-height: 100%;
+}
+
 
 .player-inventory-first {
     position: absolute;
@@ -221,11 +231,19 @@ body {
     right: 5%;
     width: 89%;
     max-width: 102.22%;
-    height: 90%;
-    max-height: 132%;
+    height: 100%;
+    max-height: 100%;
     float: right;
     z-index: 100;
 }
+
+
+.other-inventory-slots {
+    height: 47%;
+    overflow-y: auto;
+    max-height: 100%;
+}
+
 
 .ply-hotbar-inventory {
     position: absolute;
@@ -877,7 +895,7 @@ body {
     width: fit-content;
     z-index: 105;
     padding: 4px;
-    background-color: rgba(51, 52, 61, 0.500)
+    background-color: rgba(51, 52, 61, 0.500);
     border-radius: 9px;
 }
 
