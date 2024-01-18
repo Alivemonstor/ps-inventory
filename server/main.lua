@@ -205,16 +205,19 @@ local function AddItem(source, item, amount, slot, info, created)
 
 			return true
 		elseif itemInfo['unique'] or (not slot or slot == nil) or itemInfo['type'] == 'weapon' then
+
 			for i = 1, Config.MaxInventorySlots, 1 do
-				if Player.PlayerData.items[i] == nil then
-					Player.PlayerData.items[i] = { name = itemInfo['name'], amount = amount, info = info or '', label = itemInfo['label'], description = itemInfo['description'] or '', weight = itemInfo['weight'], type = itemInfo['type'], unique = itemInfo['unique'], useable = itemInfo['useable'], image = itemInfo['image'], shouldClose = itemInfo['shouldClose'], slot = i, combinable = itemInfo['combinable'], created = itemInfo['created'] }
-					Player.Functions.SetPlayerData("items", Player.PlayerData.items)
+				if i < 6 or i >= 12 then
+					if Player.PlayerData.items[i] == nil then
+						Player.PlayerData.items[i] = { name = itemInfo['name'], amount = amount, info = info or '', label = itemInfo['label'], description = itemInfo['description'] or '', weight = itemInfo['weight'], type = itemInfo['type'], unique = itemInfo['unique'], useable = itemInfo['useable'], image = itemInfo['image'], shouldClose = itemInfo['shouldClose'], slot = i, combinable = itemInfo['combinable'], created = itemInfo['created'] }
+						Player.Functions.SetPlayerData("items", Player.PlayerData.items)
 
-					if Player.Offline then return true end
+						if Player.Offline then return true end
 
-					TriggerEvent('qb-log:server:CreateLog', 'playerinventory', 'AddItem', 'green', '**' .. GetPlayerName(source) .. ' (citizenid: ' .. Player.PlayerData.citizenid .. ' | id: ' .. source .. ')** got item: [slot:' .. i .. '], itemname: ' .. Player.PlayerData.items[i].name .. ', added amount: ' .. amount .. ', new total amount: ' .. Player.PlayerData.items[i].amount)
+						TriggerEvent('qb-log:server:CreateLog', 'playerinventory', 'AddItem', 'green', '**' .. GetPlayerName(source) .. ' (citizenid: ' .. Player.PlayerData.citizenid .. ' | id: ' .. source .. ')** got item: [slot:' .. i .. '], itemname: ' .. Player.PlayerData.items[i].name .. ', added amount: ' .. amount .. ', new total amount: ' .. Player.PlayerData.items[i].amount)
 
-					return true
+						return true
+					end
 				end
 			end
 		end
@@ -1459,7 +1462,6 @@ RegisterNetEvent('inventory:server:SetInventoryData', function(fromInventory, to
 	if (toSlot >= 6 and toSlot < 12 and QBCore.Shared.SplitStr(toInventory, "-")[1] == "clothing" ) and (toInventory == "player") then
 		return TriggerClientEvent("inventory:client:UpdatePlayerInventory", src, true)
 	end
-
 
 	if fromInventory == "player" or fromInventory == "hotbar" then
 		local fromItemData = GetItemBySlot(src, fromSlot)
