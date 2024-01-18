@@ -2081,7 +2081,6 @@ function swap($fromSlot, $toSlot, $fromInv, $toInv, $toAmount) {
                                 '<div class="item-slot-img"></div><div class="item-slot-label"><p>&nbsp;</p></div>'
                             );
                     }
-
                     $.post(
                         "https://ps-inventory/SetInventoryData",
                         JSON.stringify({
@@ -2459,7 +2458,6 @@ var requiredItemOpen = false;
                 } else {
                     qualityLabel = item.info.quality;
                 }
-                console.log(qualityLabel)
                 if (item.info.quality == 0) {
                     qualityLabel = "BROKEN";
                     if (!IsOtherInventory) {
@@ -2551,6 +2549,7 @@ var requiredItemOpen = false;
         $("#qbcore-inventory").fadeIn(300);
         if (data.other != null && data.other != "") {
             $(".other-inventory").attr("data-inventory", data.other.name);
+            $(".other-inventory-slots").attr("data-inventory", data.other.name);
         } else {
             $(".other-inventory").attr("data-inventory", 0);
         }

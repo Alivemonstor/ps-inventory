@@ -1456,7 +1456,7 @@ RegisterNetEvent('inventory:server:SetInventoryData', function(fromInventory, to
 		return
 	end
 
-	if (toSlot >= 6 and toSlot < 12) and (toInventory == "player") then
+	if (toSlot >= 6 and toSlot < 12 and QBCore.Shared.SplitStr(toInventory, "-")[1] == "clothing" ) and (toInventory == "player") then
 		return TriggerClientEvent("inventory:client:UpdatePlayerInventory", src, true)
 	end
 
