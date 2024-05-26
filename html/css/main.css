@@ -27,7 +27,7 @@ p { margin: 0 !important; }
 :root {
     --color-primary: #23242e;
     --color-secondary: #383942;
-    --color-accent: rgb(65, 199, 165);
+    --color-accent: #e07b07;
 }
 
 .fas.fa-lock {
@@ -1285,6 +1285,58 @@ body {
     flex-direction: row;
     align-items: center;
     justify-content: center;
+}
+
+@media (width: 2560px) and (height: 1440px) {
+    .item-slot {
+    	position: relative;
+    	width: 120px;
+    	height: 120px;
+    	float: left;
+    	border: 2px solid #41414b;
+    	background-color: rgba(51, 52, 61, 0.500) !important;
+    	margin: 6px;
+    	transition: opacity 0.2s ease 0s;
+    	border-radius: 18px;
+    	opacity: 90%;
+	}
+    
+    .player-inventory-bg {
+		position: absolute;
+    	float: left;
+    	top: 15%;
+    	left: 21.2%;
+    	width: 31.7%;
+    	max-width: 31.7%;
+    	height: 60.17%;
+    	max-height: 60.17%;
+    	background-color: #00000000;
+    	border-radius: 10px;
+    }    
+    .player-inventory {
+    	position: absolute;
+    	top: 25%;
+    	left: 2.3%;
+    	width: 110.22%;
+    	max-width: 170.22%;
+    	height: 100%;
+    	max-height: 132%;
+    	float: right;
+    	z-index: 100;
+    }  
+    .other-inventory-bg {
+		position: absolute;
+    	top: 15%;
+    	float: right;
+    	right: 15%;
+    	margin: 0 auto;
+    	width: 24.7%;
+    	max-width: 24.7%;
+    	height: 60.17%;
+    	max-height: 60.17%;
+    	background-color: #00000000;
+    	border-radius: 10px;
+    }
 }
 
 @media (width: 2560px) and (height: 1440px) {

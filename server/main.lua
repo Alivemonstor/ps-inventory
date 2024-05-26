@@ -247,7 +247,6 @@ local function RemoveItem(source, item, amount, slot)
 			if not Player.Offline then
 				TriggerEvent('qb-log:server:CreateLog', 'playerinventory', 'RemoveItem', 'red', '**' .. GetPlayerName(source) .. ' (citizenid: ' .. Player.PlayerData.citizenid .. ' | id: ' .. source .. ')** lost item: [slot:' .. slot .. '], itemname: ' .. Player.PlayerData.items[slot].name .. ', removed amount: ' .. amount .. ', new total amount: ' .. Player.PlayerData.items[slot].amount)
 			end
-
 			return true
 		elseif Player.PlayerData.items[slot].amount == amount then
 			Player.PlayerData.items[slot] = nil
@@ -379,21 +378,23 @@ exports("SetInventory", SetInventory)
 
 ---Set the data of a specific item
 
-local function SetItemData(source, itemName, key, val)
+local function SetItemData(source, itemName, key, val, slot)
 	if not itemName or not key then return false end
 
 	local Player = QBCore.Functions.GetPlayer(source)
 
 	if not Player then return end
-
-	local item = GetItemByName(source, itemName)
-
+	local item = nil
+	if slot then
+		item = Player.PlayerData.items[slot]
+	else
+		item = GetItemByName(source, itemName)
+	end
 	if not item then return false end
 
 	item[key] = val
 	Player.PlayerData.items[item.slot] = item
 	Player.Functions.SetPlayerData("items", Player.PlayerData.items)
-
 	return true
 end
 
@@ -550,6 +551,8 @@ local function GetStashItems(stashId)
 	return items
 end
 
+exports("GetStashItems", GetStashItems) -- av-scripts export
+
 local function SaveStashItems(stashId, items)
 	if Stashes[stashId].label == "Stash-None" or not items then return end
 
@@ -564,6 +567,8 @@ local function SaveStashItems(stashId, items)
 
 	Stashes[stashId].isOpen = false
 end
+
+exports("SaveStashItems",SaveStashItems) -- av-scripts export
 
 local function AddToStash(stashId, slot, otherslot, itemName, amount, info, created)
 	amount = tonumber(amount) or 1
@@ -625,6 +630,8 @@ local function AddToStash(stashId, slot, otherslot, itemName, amount, info, crea
 	end
 end
 
+exports('addStashItem', AddToStash) -- av-scripts export
+
 local function RemoveFromStash(stashId, slot, itemName, amount)
 	amount = tonumber(amount) or 1
 	if Stashes[stashId].items[slot] and Stashes[stashId].items[slot].name == itemName then
@@ -640,7 +647,7 @@ local function RemoveFromStash(stashId, slot, itemName, amount)
 		end
 	end
 end
-
+exports('RemoveFromStash', RemoveFromStash)
 -- Trunk items
 local function GetOwnedVehicleItems(plate)
 	local items = {}
@@ -678,6 +685,7 @@ local function SaveOwnedVehicleItems(plate, items)
 	for _, item in pairs(items) do
 		item.description = nil
 	end
+
 
 	MySQL.insert('INSERT INTO trunkitems (plate, items) VALUES (:plate, :items) ON DUPLICATE KEY UPDATE items = :items', {
 		['plate'] = plate,
@@ -1171,7 +1179,7 @@ RegisterNetEvent('inventory:server:OpenInventory', function(name, id, other)
 					slots = other.slots or 50
 				end
 				secondInv.name = "stash-"..id
-				secondInv.label = "Stash-"..id
+				secondInv.label = newLabel or 'Stash-' .. id -- ADD IT HERE
 				secondInv.maxweight = maxweight
 				secondInv.inventory = {}
 				secondInv.slots = slots
@@ -1359,30 +1367,40 @@ RegisterNetEvent('inventory:server:OpenInventory', function(name, id, other)
 	end
 end)
 
-RegisterNetEvent('inventory:server:SaveInventory', function(type, id)
-	if type == "trunk" then
+AddEventHandler('txAdmin:events:serverShuttingDown', function(eventData)
+	for k , v in pairs(Trunks) do
+		if IsVehicleOwned(k) then
+			SaveOwnedVehicleItems(k, Trunks[k].items)
+		end
+	end
+end)
+
+RegisterNetEvent('inventory:server:SaveInventory', function(type, id) -- av-scripts
+	local src = source
+	if type == 'trunk' then
 		if IsVehicleOwned(id) then
 			SaveOwnedVehicleItems(id, Trunks[id].items)
 		else
 			Trunks[id].isOpen = false
 		end
-	elseif type == "glovebox" then
+	elseif type == 'glovebox' then
 		if (IsVehicleOwned(id)) then
 			SaveOwnedGloveboxItems(id, Gloveboxes[id].items)
 		else
 			Gloveboxes[id].isOpen = false
 		end
-	elseif type == "stash" then
+	elseif type == 'stash' then
 		SaveStashItems(id, Stashes[id].items)
-	elseif type == "drop" then
+	elseif type == 'drop' then
 		if Drops[id] then
 			Drops[id].isOpen = false
 			if Drops[id].items == nil or next(Drops[id].items) == nil then
 				Drops[id] = nil
-				TriggerClientEvent("inventory:client:RemoveDropItem", -1, id)
+				TriggerClientEvent('inventory:client:RemoveDropItem', -1, id)
 			end
 		end
 	end
+	TriggerEvent("av_scripts:inventorySaved",src,type,id)
 end)
 
 RegisterNetEvent('inventory:server:UseItemSlot', function(slot)
@@ -1498,7 +1516,6 @@ RegisterNetEvent('inventory:server:SetInventoryData', function(fromInventory, to
 	if (toSlot >= 6 and toSlot < 12) and (toInventory == "player") and (QBCore.Shared.SplitStr(GetItemBySlot(src, fromSlot).name, "-")[1] ~= "clothing") then
 		return TriggerClientEvent("inventory:client:UpdatePlayerInventory", src, true)
 	end
-
 
 	if fromInventory == "player" or fromInventory == "hotbar" then
 		local fromItemData = GetItemBySlot(src, fromSlot)
@@ -2533,3 +2550,30 @@ QBCore.Functions.CreateCallback('inventory:server:ConvertQuality', function(sour
     data.other = other
     cb(data)
 end)
+
+function getTrunkItems(plate)
+	if Trunks[plate] then
+		return Trunks[plate]
+	else
+		local result = MySQL.scalar.await('SELECT items FROM trunkitems WHERE plate = ?', {plate})
+		if not result then return false end
+		local data = {
+			items = json.decode(result)
+		}
+		return data
+	end
+end
+function getGloveboxItems(plate)
+	if Gloveboxes[plate] then
+		return Gloveboxes[plate]
+	else
+		local result = MySQL.scalar.await('SELECT items FROM gloveboxitems WHERE plate = ?', {plate})
+		if not result then return false end
+		local data = {
+			items = json.decode(result)
+		}
+		return data
+	end
+end
+exports("getGloveboxItems", getGloveboxItems)
+exports("getTrunkItems", getTrunkItems)

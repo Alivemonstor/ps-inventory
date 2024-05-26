@@ -224,6 +224,8 @@ $(document).on("click", ".item-slot", function(e) {
     }
 });
 
+
+
 $(document).on("click", "#inv-close", function(e) {
     e.preventDefault();
     Inventory.Close();
@@ -580,6 +582,23 @@ function FormatItemInfo(itemData, dom) {
             $(".item-info-description").html(
                 "<p>" + itemData.info.uses + " uses left.</p>"
             );
+        }else if (itemData.name == "blueprint") {
+                $(".item-info-title").html("<p>" + itemData.label + "</p>"); 
+                $(".item-info-description").html("<p> Type: " + itemData.info.type + "</p>");
+        }else if (itemData.name == "srecuritycard") {
+                $(".item-info-title").html("<p>" + itemData.label + "</p>"); 
+                $(".item-info-description").html("<p> Code: " + itemData.info.code + "</p>"
+            ); 
+        } else if (itemData.name == "lawyerpass") {
+            $(".item-info-title").html("<p>" + itemData.label + "</p>");
+            $(".item-info-description").html(
+                "<p><strong>Bar ID: </strong><span>" +
+                itemData.info.baridnumber +
+                "</span></p><p><strong>Full Name: </strong><span>" +
+                itemData.info.lawyername +
+                "</span></p>"
+            );  
+            
         } else if (itemData.name == "mechboard") {
             $(".item-info-title").html("<p>" + itemData.label + "</p>");
             $(".item-info-description").html(
@@ -622,61 +641,102 @@ function FormatItemInfo(itemData, dom) {
                     "</p>"
                 );
             }
-        } else if (itemData.name == "filled_evidence_bag") {
-            $(".item-info-title").html("<p>" + itemData.label + "</p>");
-            if (itemData.info.type == "casing") {
+            
+} else if (itemData.name == "document") {
+    $(".item-info-title").html("<p>" + "Document" + "</p>");
+    $(".item-info-description").html(
+        "<p><strong>Document ID: </strong><span>" +
+        itemData.info.documentidentifier +
+        "</span></p><p><strong>Document Name: </strong><span>" +
+        itemData.info.documentname +
+        "</span></p><p><strong>Creator: </strong><span>" +
+        itemData.info.documentcreator +
+        "</span></p>"
+    );
+} else if (itemData.name == "filled_evidence_bag") {
+    $(".item-info-title").html("<p>" + itemData.label + "</p>");
+    if (itemData.info.type == "casing") {
+        $(".item-info-description").html(
+            "<p><strong>Evidence material: </strong><span>" +
+            itemData.info.label +
+            "</span></p><p><strong>Type number: </strong><span>" +
+            itemData.info.ammotype +
+            "</span></p><p><strong>Caliber: </strong><span>" +
+            itemData.info.ammolabel +
+            "</span></p><p><strong>Serial Number: </strong><span>" +
+            itemData.info.serie +
+            "</span></p><p><strong>Crime scene: </strong><span>" +
+            itemData.info.street +
+            "</span></p><br /><p>" +
+            itemData.description +
+            "</p>"
+        );
+} else if (itemData.info.type == "blood") {
+        $(".item-info-description").html(
+            "<p><strong>Evidence material: </strong><span>" +
+            itemData.info.label +
+            "</span></p><p><strong>Blood type: </strong><span>" +
+            itemData.info.bloodtype +
+            "</span></p><p><strong>DNA Code: </strong><span>" +
+            itemData.info.dnalabel +
+            "</span></p><p><strong>Crime scene: </strong><span>" +
+            itemData.info.street +
+            "</span></p><br /><p>" +
+            itemData.description +
+            "</p>"
+        );
+} else if (itemData.info.type == "fingerprint") {
+        $(".item-info-description").html(
+            "<p><strong>Evidence material: </strong><span>" +
+            itemData.info.label +
+            "</span></p><p><strong>Fingerprint: </strong><span>" +
+            itemData.info.fingerprint +
+            "</span></p><p><strong>Crime Scene: </strong><span>" +
+            itemData.info.street +
+            "</span></p><br /><p>" +
+            itemData.description +
+            "</p>"
+        );
+} else if (itemData.info.type == "dna") {
+        $(".item-info-description").html(
+            "<p><strong>Evidence material: </strong><span>" +
+            itemData.info.label +
+            "</span></p><p><strong>DNA Code: </strong><span>" +
+            itemData.info.dnalabel +
+            "</span></p><br /><p>" +
+            itemData.description +
+            "</p>"
+        );
+            }}else if (itemData.name == "phone") {
+                $(".item-info-title").html("<p>" + itemData.label + "</p>");
                 $(".item-info-description").html(
-                    "<p><strong>Evidence material: </strong><span>" +
-                    itemData.info.label +
-                    "</span></p><p><strong>Type number: </strong><span>" +
-                    itemData.info.ammotype +
-                    "</span></p><p><strong>Caliber: </strong><span>" +
-                    itemData.info.ammolabel +
-                    "</span></p><p><strong>Serial: </strong><span>" +
-                    itemData.info.serie +
-                    "</span></p><p><strong>Crime scene: </strong><span>" +
-                    itemData.info.street +
-                    "</span></p><br /><p>" +
-                    itemData.description +
-                    "</p>"
-                );
-            } else if (itemData.info.type == "blood") {
+                    "<p><strong>Phone Number: </strong><span>" + itemData.info.phoneNumber + '</span></p>' + "</span></p><p><strong>Firstname: </strong><span>" + itemData.info.charinfo.firstname + '</span></p>' + "</span></p><p><strong>Lastname: </strong><span>" + itemData.info.charinfo.lastname + '</span></p>'
+                ); 
+            }else if (itemData.name == "black_phone") {
+                $(".item-info-title").html("<p>" + itemData.label + "</p>");
                 $(".item-info-description").html(
-                    "<p><strong>Evidence material: </strong><span>" +
-                    itemData.info.label +
-                    "</span></p><p><strong>Blood type: </strong><span>" +
-                    itemData.info.bloodtype +
-                    "</span></p><p><strong>DNA Code: </strong><span>" +
-                    itemData.info.dnalabel +
-                    "</span></p><p><strong>Crime scene: </strong><span>" +
-                    itemData.info.street +
-                    "</span></p><br /><p>" +
-                    itemData.description +
-                    "</p><p style=\"font-size:11px\"><b>Weight: </b>" + itemData.weight + " | <b>Amount: </b> " + itemData.amount + " | <b>Quality: </b> " + "<a style=\"font-size:11px;color:green\">" + Math.floor(itemData.info.quality) + "</a>"
-                );
-            } else if (itemData.info.type == "fingerprint") {
+                    "<p><strong>Phone Number: </strong><span>" + itemData.info.phoneNumber + '</span></p>' + "</span></p><p><strong>Firstname: </strong><span>" + itemData.info.charinfo.firstname + '</span></p>' + "</span></p><p><strong>Lastname: </strong><span>" + itemData.info.charinfo.lastname + '</span></p>'
+                ); 
+            }else if (itemData.name == "yellow_phone") {
+                $(".item-info-title").html("<p>" + itemData.label + "</p>");
                 $(".item-info-description").html(
-                    "<p><strong>Evidence material: </strong><span>" +
-                    itemData.info.label +
-                    "</span></p><p><strong>Fingerprint: </strong><span>" +
-                    itemData.info.fingerprint +
-                    "</span></p><p><strong>Crime Scene: </strong><span>" +
-                    itemData.info.street +
-                    "</span></p><br /><p>" +
-                    itemData.description +
-                    "</p><p style=\"font-size:11px\"><b>Weight: </b>" + itemData.weight + " | <b>Amount: </b> " + itemData.amount + " | <b>Quality: </b> " + "<a style=\"font-size:11px;color:green\">" + Math.floor(itemData.info.quality) + "</a>"
-                );
-            } else if (itemData.info.type == "dna") {
+                    "<p><strong>Phone Number: </strong><span>" + itemData.info.phoneNumber + '</span></p>' + "</span></p><p><strong>Firstname: </strong><span>" + itemData.info.charinfo.firstname + '</span></p>' + "</span></p><p><strong>Lastname: </strong><span>" + itemData.info.charinfo.lastname + '</span></p>'
+                ); 
+            }else if (itemData.name == "white_phone") {
+                $(".item-info-title").html("<p>" + itemData.label + "</p>");
                 $(".item-info-description").html(
-                    "<p><strong>Evidence material: </strong><span>" +
-                    itemData.info.label +
-                    "</span></p><p><strong>DNA Code: </strong><span>" +
-                    itemData.info.dnalabel +
-                    "</span></p><br /><p>" +
-                    itemData.description +
-                    "</p><p style=\"font-size:11px\"><b>Weight: </b>" + itemData.weight + " | <b>Amount: </b> " + itemData.amount + " | <b>Quality: </b> " + "<a style=\"font-size:11px;color:green\">" + Math.floor(itemData.info.quality) + "</a>"
+                    "<p><strong>Phone Number: </strong><span>" + itemData.info.phoneNumber + '</span></p>' + "</span></p><p><strong>Firstname: </strong><span>" + itemData.info.charinfo.firstname + '</span></p>' + "</span></p><p><strong>Lastname: </strong><span>" + itemData.info.charinfo.lastname + '</span></p>'
+                ); 
+            }else if (itemData.name == "red_phone") {
+                $(".item-info-title").html("<p>" + itemData.label + "</p>");
+                $(".item-info-description").html(
+                    "<p><strong>Phone Number: </strong><span>" + itemData.info.phoneNumber + '</span></p>' + "</span></p><p><strong>Firstname: </strong><span>" + itemData.info.charinfo.firstname + '</span></p>' + "</span></p><p><strong>Lastname: </strong><span>" + itemData.info.charinfo.lastname + '</span></p>'
+                ); 
+            }else if (itemData.name == "green_phone") {
+                $(".item-info-title").html("<p>" + itemData.label + "</p>");
+                $(".item-info-description").html(
+                    "<p><strong>Phone Number: </strong><span>" + itemData.info.phoneNumber + '</span></p>' + "</span></p><p><strong>Firstname: </strong><span>" + itemData.info.charinfo.firstname + '</span></p>' + "</span></p><p><strong>Lastname: </strong><span>" + itemData.info.charinfo.lastname + '</span></p>'
                 );
-            }
         } else if (
             itemData.info.costs != undefined &&
             itemData.info.costs != null
@@ -863,7 +923,8 @@ function handleDragDrop() {
             fromSlot = ui.draggable.attr("data-slot");
             fromInventory = ui.draggable.parent();
             toSlot = $(this).attr("data-slot");
-            toInventory = $(this).parent();
+
+            toInventory = $(this).parent().parent();
             toAmount = $("#item-amount").val();
 
             var toDataUnique = toInventory.find("[data-slot=" + toSlot + "]").data("item");
@@ -2366,6 +2427,7 @@ function swap($fromSlot, $toSlot, $fromInv, $toInv, $toAmount) {
                     // }
                         }
                 $.post("https://ps-inventory/PlayDropSound", JSON.stringify({}));
+
                 $.post(
                     "https://ps-inventory/SetInventoryData",
                     JSON.stringify({
@@ -3250,4 +3312,8 @@ $("#item-give").droppable({
             })
         );
     },
+
 });
+
+
+

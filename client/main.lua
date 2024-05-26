@@ -919,10 +919,13 @@ RegisterNUICallback("CloseInventory", function()
     inInventory = false
 end)
 
+
 RegisterNUICallback("UseItem", function(data, cb)
     TriggerServerEvent("inventory:server:UseItem", data.inventory, data.item)
     cb('ok')
 end)
+
+
 
 RegisterNUICallback("combineItem", function(data, cb)
     Wait(150)
