@@ -1449,6 +1449,35 @@ RegisterNetEvent('inventory:server:UseItem', function(inventory, item)
 	end
 end)
 
+function CanClothingGoIntoSlot(slot, item)
+	if slot == 6 then
+		if item == "hat" then
+			return true
+		end
+	elseif slot == 7 then
+		if item == "mask" then
+			return true
+		end
+	elseif slot == 8 then
+		if item == "torso2" then
+			return true
+		end
+	elseif slot == 9 then
+		if item == "t-shirt" then
+			return true
+		end
+	elseif slot == 10 then
+		if item == "pants" then
+			return true
+		end
+	elseif slot == 11 then
+		if item == "shoes" then
+			return true
+		end
+	end
+	return false
+end
+
 RegisterNetEvent('inventory:server:SetInventoryData', function(fromInventory, toInventory, fromSlot, toSlot, fromAmount, toAmount)
 	local src = source
 	local Player = QBCore.Functions.GetPlayer(src)
@@ -1459,9 +1488,17 @@ RegisterNetEvent('inventory:server:SetInventoryData', function(fromInventory, to
 		return
 	end
 
-	if (toSlot >= 6 and toSlot < 12 and QBCore.Shared.SplitStr(toInventory, "-")[1] == "clothing" ) and (toInventory == "player") then
+	if (toSlot >= 6 and toSlot < 12) and (toInventory == "player") and (QBCore.Shared.SplitStr(GetItemBySlot(src, fromSlot).name, "-")[1] == "clothing") then
+		local canDo = CanClothingGoIntoSlot(toSlot, QBCore.Shared.SplitStr(GetItemBySlot(src, fromSlot).name, "-")[2])
+		if not canDo then
+			return TriggerClientEvent("inventory:client:UpdatePlayerInventory", src, true)
+		end
+	end
+
+	if (toSlot >= 6 and toSlot < 12) and (toInventory == "player") and (QBCore.Shared.SplitStr(GetItemBySlot(src, fromSlot).name, "-")[1] ~= "clothing") then
 		return TriggerClientEvent("inventory:client:UpdatePlayerInventory", src, true)
 	end
+
 
 	if fromInventory == "player" or fromInventory == "hotbar" then
 		local fromItemData = GetItemBySlot(src, fromSlot)
